@@ -31,6 +31,7 @@ int main(){
     portA.input=0x50;//01010000
     printf("%x\n",GPIO_WRITE_INPINLOW(portA,4));//01000000
     printf("%x\n",GPIO_WRITE_INPINHIGH(portA,3));//01001000
+<<<<<<< HEAD
     printf("%x\n",GPIO_TOGGLE_INPIN(portA,2));//01001100
     portA.output=0x75;//01110101
     printf("%x\n",GPIO_WRITE_OUTPINHIGH(portA,4));//01110101
@@ -39,6 +40,14 @@ int main(){
     //reading inputs
     printf("%x\n",GPIO_READ_INPUTPIN(portA,4));
     printf("%x\n",GPIO_READ_OUTPUTPIN(portA,3));
+=======
+    printf("%x\n",GPIO_TOGGLE_INPIN(portA,3));//
+    portA.output=0x75;//01110101
+    printf("%x\n",GPIO_WRITE_OUTPINHIGH(portA,4));
+    printf("%x\n",GPIO_WRITE_OUTINLOW(portA,3));
+    printf("%x\n",GPIO_TOGGLE_OUTPIN(portA,3));
+
+>>>>>>> 5df3446a403d09ca3369d19fa70c7dbc1bc3ea11
 }
 
 
