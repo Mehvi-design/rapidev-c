@@ -1,22 +1,44 @@
 #include<stdio.h>
-#include<stdbool.h>
 #include<stdint.h>
-bool calculate_even_parity(uint8_t byte){
-    int count=0;
-  for(int i=7;i>=0;i++){
-    if(byte&(1<<i)){
-        count+=1;
-    }
-  }
-  if(count%2==0){
-    return true;
-  }
-  else{
-    return false;
-  }
-  printf("%d\n",count);
-}  // Return 1 if parity is even
+
+typedef struct {
+uint8_t direction;
+uint8_t output;
+uint8_t input;
+} GPIO_Port;
+//macros
+#define GPIO_READ_INPUTPIN(PORT,pin)
+#define GPIO_READ_OUTPUTPIN(PORT,pin)
+#define GPIO_WRITE_PINHIGH(PORT,mask)
+#define GPIO_WRITE_PINLOW(PORT,mask)
+#define GPIO_SET_PINOUTPUT(PORT,mask)
+#define GPIO_SET_PININPUT(PORT,mask)
+#define GPIO_TOGGLE_PIN(PORT,mask)(PORT.output=~(PORT.input|(1<<mask)))
+
 int main(){
-    uint8_t byte=0x05;
-printf("The parity is: %s",(calculate_even_parity(byte))?"Even":"Odd");
+    GPIO_Port portA={0};
+    printf("%d",GPIO_TOGGLE_PIN(portA,0));
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
