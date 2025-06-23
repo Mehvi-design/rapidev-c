@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "mian.C": "cpp",
+        "stdint.h": "c"
+    },
+    "C_Cpp.default.compilerPath": "D:/msys64/ucrt64/bin/gcc.exe"
+}
