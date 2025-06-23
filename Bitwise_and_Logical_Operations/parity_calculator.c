@@ -3,20 +3,21 @@
 #include<stdint.h>
 bool calculate_even_parity(uint8_t byte){
     int count=0;
-  for(int i=7;i>=0;i++){
+  for(int i=7;i>=0;i--){
     if(byte&(1<<i)){
         count+=1;
     }
   }
+  printf("%d\n",count);
   if(count%2==0){
     return true;
   }
   else{
     return false;
   }
-  printf("%d\n",count);
-}  // Return 1 if parity is even
+  
+}  // Return true if parity is even
 int main(){
-    uint8_t byte=0x05;
+    uint8_t byte=0x07;
 printf("The parity is: %s",(calculate_even_parity(byte))?"Even":"Odd");
 }
