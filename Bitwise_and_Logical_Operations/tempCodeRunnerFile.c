@@ -1,25 +1,23 @@
 #include<stdio.h>
 #include<stdint.h>
-#include<stdbool.h>
-bool read_gpio(uint8_t port, uint8_t pin){
-//to check if the specific pin is set high or not
- return((port&pin)!=0);//00000001 & 00001000=0x00(False the bit is zero) otherwise (True) bit is 1
+uint8_t reverse_bits(uint8_t byte){
+    uint8_t fixed=0x00;
+    for(int i=0;i<8;i++){
+       fixed<<=1;
+       fixed|=(byte&1);
+       byte>>=1;
+    }
+    return fixed;
+}  // e.g., 0b10000001 → 0b10000001
+void binary(uint8_t input){
+    printf("\nThe result in binary is 0b");
+   for(int i=7;i>=0;i--){
+    printf("%c",(input&(1<<i))? '1':'0');//00001001
+   }
+   printf("\n");
 }
-void set_gpio(uint8_t *port, uint8_t pin){
-//to set the input's specific pin high
-    *port=(*port^pin);
-    printf("The specific pin is set to high hence: %x\n",*port);
-}
-void clear_gpio(uint8_t *port, uint8_t pin){
-//set's the input's specific pin zero
-    *port&=(*port^pin);
-    printf("The specific pin is set to zero hence: %x\n",*port);
-}
-
 int main(){
- uint8_t port=0x01;
- uint8_t pin=0x01;
- printf("The specific pin is %s\n",read_gpio(port, pin)?"high":"low");
- clear_gpio(&port, pin);
- read_gpio(&port, pin);
+ uint8_t byte=0x81;
+ binary(byte);
+ binary(reverse_bits(byte));
 }
