@@ -36,14 +36,9 @@ int main(){
     printf("%x\n",GPIO_WRITE_OUTPINHIGH(portA,4));//01110101
     printf("%x\n",GPIO_WRITE_OUTINLOW(portA,3));//01110101
     printf("%x\n",GPIO_TOGGLE_OUTPIN(portA,3));//01111101
-<<<<<<< HEAD
     //reading inputs
     printf("%x\n",GPIO_READ_INPUTPIN(portA,4));
     printf("%x\n",GPIO_READ_OUTPUTPIN(portA,3));
-=======
-    
-
->>>>>>> 5df3446a403d09ca3369d19fa70c7dbc1bc3ea11
 }
 
 
