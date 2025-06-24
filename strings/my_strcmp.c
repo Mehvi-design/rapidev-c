@@ -5,11 +5,10 @@
 int strcmp_case_insensitive(const char *a, const char *b){
     int i=0;
     while(a[i]!='\0'||b[i]!='\0'){
-        if(_tolower(a[i])!=_tolower(b[i])){
+        if(tolower(a[i])!=tolower(b[i])){
            return 1;
         }
-        a++;
-        b++;
+        i++;
     }
     return 0;
 }
