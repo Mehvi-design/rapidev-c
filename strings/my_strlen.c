@@ -12,6 +12,6 @@ size_t my_strlen(const char *str){
 }
     
 int main(){
-        char str[]= "hello";
+        char str[]= " ";
     printf("%d",my_strlen(str));
 }
