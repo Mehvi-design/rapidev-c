@@ -15,7 +15,7 @@ void clean_spaces(char *str){
     str[count]='\0';
 }
 int main(){
-    char str[]="watermug";
+    char str[]=" I like Rapidev ";
     clean_spaces(str);
     printf("%s",str);
 }
