@@ -3,9 +3,17 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-typedef enum { CMD_SET, CMD_READ, CMD_INVALID } CommandType;
+#define MAX_PARAMS 10
 
-// Converts a word to uppercase (helper function)
+typedef struct {
+    char param[16];
+    char value[16];
+} Param;
+
+Param param_store[MAX_PARAMS];
+int param_count = 0;
+
+// Convert string to uppercase (for command keyword only)
 void to_uppercase(char *str) {
     while (*str) {
         *str = toupper((unsigned char)*str);
@@ -13,58 +21,85 @@ void to_uppercase(char *str) {
     }
 }
 
-// Parses the command type from the input string
-CommandType parse_command(const char *input) {
-    char command[10];
-    sscanf(input, "%s", command);
-    to_uppercase(command);
+// Trims newline from fgets input
+void trim_newline(char *str) {
+    str[strcspn(str, "\n")] = '\0';
+}
 
-    if (strcmp(command, "SET") == 0) {
-        return CMD_SET;
-    } else if (strcmp(command, "READ") == 0) {
-        return CMD_READ;
+// Find param index in store (-1 if not found)
+int find_param(const char *param) {
+    for (int i = 0; i < param_count; i++) {
+        if (strcmp(param_store[i].param, param) == 0) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+// Add or update param
+void set_param(const char *param, const char *value) {
+    int idx = find_param(param);
+    if (idx >= 0) {
+        snprintf(param_store[idx].value, sizeof(param_store[idx].value), "%s", value);
+    } else if (param_count < MAX_PARAMS) {
+        snprintf(param_store[param_count].param, sizeof(param_store[param_count].param), "%s", param);
+        snprintf(param_store[param_count].value, sizeof(param_store[param_count].value), "%s", value);
+        param_count++;
     } else {
-        return CMD_INVALID;
+        printf("Parameter store full!\n");
     }
 }
 
-// Handlers for each command type
-void handle_set(const char *sensor, float value) {
-    printf("Setting %s to %.1f\n", sensor, value);
-}
-
-void handle_read(const char *sensor) {
-    printf("Reading value from %s\n", sensor);
-}
-
-// Executes the command by parsing it and calling the appropriate handler
-void execute_command(const char *input) {
-    CommandType cmd = parse_command(input);
-
-    if (cmd == CMD_SET) {
-        char sensor[20];
-        float value;
-        if (sscanf(input, "%*s %s %f", sensor, &value) == 2) {
-            handle_set(sensor, value);
-        } else {
-            printf("Invalid SET format. Use: SET SENSOR VALUE\n");
-        }
-    } else if (cmd == CMD_READ) {
-        char sensor[20];
-        if (sscanf(input, "%*s %s", sensor) == 1) {
-            handle_read(sensor);
-        } else {
-            printf("Invalid READ format. Use: READ SENSOR\n");
-        }
+// Print value of a param
+void get_param(const char *param) {
+    int idx = find_param(param);
+    if (idx >= 0) {
+        printf("%s = %s\n", param_store[idx].param, param_store[idx].value);
     } else {
-        printf("Unknown command.\n");
+        printf("Param '%s' not found.\n", param);
     }
 }
 
-// Test in main
+// List all stored params
+void list_params() {
+    if (param_count == 0) {
+        printf("No parameters stored.\n");
+        return;
+    }
+    for (int i = 0; i < param_count; i++) {
+        printf("%s = %s\n", param_store[i].param, param_store[i].value);
+    }
+}
+
+// Mini CLI shell loop
+void cli_shell() {
+    char input[64];
+    char cmd[8], arg1[16], arg2[16];
+
+    printf("Mini CLI Shell. Type commands like SET, GET, LIST. Ctrl+C to quit.\n");
+    while (1) {
+        printf("> ");
+        if (fgets(input, sizeof(input), stdin) == NULL) {
+            break;
+        }
+
+        trim_newline(input);
+        int arg_count = sscanf(input, "%7s %15s %15s", cmd, arg1, arg2);
+        to_uppercase(cmd);
+
+        if (strcmp(cmd, "SET") == 0 && arg_count == 3) {
+            set_param(arg1, arg2);
+        } else if (strcmp(cmd, "GET") == 0 && arg_count >= 2) {
+            get_param(arg1);
+        } else if (strcmp(cmd, "LIST") == 0) {
+            list_params();
+        } else {
+            printf("Unknown or invalid command.\n");
+        }
+    }
+}
+
 int main() {
-    execute_command("SET TEMP 25");
-    execute_command("READ TEMP");
-    execute_command("INVALID CMD");
+    cli_shell();
     return 0;
 }
