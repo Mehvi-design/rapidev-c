@@ -24,7 +24,7 @@ const char *match_command(const char *input) {
 }
 
 int main() {
-    char input[] = "water start";
+    char input[] = "start";
     const char *result = match_command(input);
 
     if (result) {
