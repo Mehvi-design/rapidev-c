@@ -5,7 +5,7 @@
 #define PERM_WRITE (1 << 1)
 #define PERM_EXEC  (1 << 2)
 bool has_permission(uint8_t user_perm, uint8_t required_perm){
-if(user_perm & required_perm){
+if(user_perm & required_perm){//if the permission asked or reuired permission and result is true
     return true;
 }
 }

@@ -12,7 +12,7 @@ bool ends_with(const char *str, const char *suffix){
 }
 int main(){
     printf("The string start with prefix: %s\n",(starts_with("OpenAI", "Open"))? "Yes":"No");
-    printf("The string start with prefix: %s",(ends_with("OpenAI","Open"))? "Yes":"No");
+    printf("The string start with prefix: %s\n",(ends_with("OpenAI","Open"))? "Yes":"No");
      printf("The string start with prefix: %s",(ends_with("OpenAI","AI"))? "Yes":"No");
     
 }

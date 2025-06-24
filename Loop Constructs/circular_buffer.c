@@ -2,7 +2,7 @@
 
 void print_circular_buffer(int *buffer, int size, int start, int count) {
     for (int i = 0; i < count; i++) {
-        int pos = (i + start) % size;
+        int pos = (i + start) % size;//for circular wrapping it takes modulus with size
         printf("%d", buffer[pos]);
         if (i < count - 1) printf(",");
     }

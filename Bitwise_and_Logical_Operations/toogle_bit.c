@@ -2,7 +2,7 @@
 #include<stdint.h>
 
 uint8_t toggle_bit(uint8_t reg, uint8_t bit_pos){
-     return reg^bit_pos;
+     return reg^bit_pos;//xor returns 1 if 0 or 1 or 1 or 0
 }
 void binary(uint8_t input){
     printf("\nThe result in binary is 0b");

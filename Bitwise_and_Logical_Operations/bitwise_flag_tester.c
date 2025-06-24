@@ -4,7 +4,7 @@
 #define FLAG_TX_READY  (1 << 0)
 #define FLAG_RX_READY  (1 << 1)
 #define FLAG_ERROR     (1 << 2)
-bool is_flag_set(uint8_t status, uint8_t flag){
+bool is_flag_set(uint8_t status, uint8_t flag){//if the And result of flag and status is true the flag is enabled
    return status & flag;
 }
 int main(){

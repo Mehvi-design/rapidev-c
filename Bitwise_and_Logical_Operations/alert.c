@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdbool.h>
-bool should_alert(int temp, int pressure, bool enabled){
-    return enabled&&((temp<0||temp>100)||(pressure<30||pressure>70));
+bool should_alert(int temp, int pressure, bool enabled){//give true or false depending on conditions
+    return enabled&&((temp<0||temp>100)||(pressure<30||pressure>70));//setting the conditions 
 }
 int main(){
     int T,P,E;

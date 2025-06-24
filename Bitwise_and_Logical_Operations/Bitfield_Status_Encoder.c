@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdint.h>
 #include<stdbool.h>
+//macros
 #define SENSOR_TEMP    (1 << 0)
 #define SENSOR_PRESS   (1 << 1)
 #define SENSOR_VIB     (1 << 2)
@@ -18,10 +19,10 @@ if(vib){
 printf("The bitfield status encoder is : %d\n",initial);
 return initial;
 }
-void binary(uint8_t input){
+void binary(uint8_t input){//function that converts into binary
     printf("\nThe result in binary is 0b");
    for(int i=7;i>=0;i--){
-    printf("%c",(input&(1<<i))? '1':'0');
+    printf("%c",(input&(1<<i))? '1':'0');//if the bit gives 1 after and with 1 it is 1 otherwise 0,we have used shifting
    }
    printf("\n");
 }

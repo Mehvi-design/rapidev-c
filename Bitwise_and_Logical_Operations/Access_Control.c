@@ -1,8 +1,8 @@
 #include<stdio.h>
 #include<stdbool.h>
-bool check_access(bool is_admin, bool has_token){
-   bool access=is_admin||has_token;
-   return access;
+bool check_access(bool is_admin, bool has_token){//function to check if user has access
+   bool access=is_admin||has_token;//if user is admin or has token access true
+   return access;// return the result
 }
 int main(){
     int admin_input,token_input;

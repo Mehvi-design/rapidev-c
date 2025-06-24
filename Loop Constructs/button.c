@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include <stdbool.h>// for bool
 
-bool debounce_button(const bool samples[], int length){
+bool debounce_button(const bool samples[], int length){//checks if button is pressed for 5 iteration
     int b=0;
     for (int i=0;i<length;i++){
       if (samples[i]==true){

@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdbool.h>
 bool system_health_ok(bool sensor_ok, bool memory_ok, bool watchdog_triggered){
-    return sensor_ok && memory_ok && !watchdog_triggered;
+    return sensor_ok && memory_ok && !watchdog_triggered;//for system helath sensor should be ok,memory should be ok and watchdog timer is off
 }
 int main(){
     int sensor_input,memory_input,watchdog_input;

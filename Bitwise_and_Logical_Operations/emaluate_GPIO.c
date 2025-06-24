@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdint.h>
 #include<stdbool.h>
-void binary(uint8_t input){
+void binary(uint8_t input){//converts to binary
     printf("0b");
     for(int i=7;i>=0;i--){
         printf("%c",(input&1<<i)?'1':'0');
