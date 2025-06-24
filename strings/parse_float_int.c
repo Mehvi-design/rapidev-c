@@ -11,9 +11,7 @@ int parse_int(const char *str) {
     }
     return 0; // Default if no number found
 }
-#include <stdio.h>
-#include <stdlib.h>
-#include <ctype.h>
+
 
 float parse_float(const char *str) {
     while (*str) {
